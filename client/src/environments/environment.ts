@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api',
+  // apiUrl: 'http://localhost:5000/api',
+  apiUrl: 'https://my-task-manager-api-33wp.onrender.com/api',
 };
 
 /*

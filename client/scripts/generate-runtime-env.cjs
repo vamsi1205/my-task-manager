@@ -1,23 +1,23 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const rootEnvPath = path.resolve(__dirname, '../../.env');
+const rootEnvPath = path.resolve(__dirname, "../../.env");
 const devEnvironmentPath = path.resolve(
   __dirname,
-  '../src/environments/environment.ts'
+  "../src/environments/environment.ts",
 );
 const prodEnvironmentPath = path.resolve(
   __dirname,
-  '../src/environments/environment.prod.ts'
+  "../src/environments/environment.prod.ts",
 );
 
 const parseEnv = (content) =>
   content
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .filter((line) => line && !line.startsWith('#'))
+    .filter((line) => line && !line.startsWith("#"))
     .reduce((acc, line) => {
-      const separatorIndex = line.indexOf('=');
+      const separatorIndex = line.indexOf("=");
       if (separatorIndex === -1) {
         return acc;
       }
@@ -29,10 +29,12 @@ const parseEnv = (content) =>
     }, {});
 
 const env = fs.existsSync(rootEnvPath)
-  ? parseEnv(fs.readFileSync(rootEnvPath, 'utf8'))
+  ? parseEnv(fs.readFileSync(rootEnvPath, "utf8"))
   : {};
 
-const apiUrl = env.API_URL || 'http://localhost:5000/api';
+// const apiUrl = env.API_URL || 'http://localhost:5000/api';
+const apiUrl =
+  env.API_URL || "https://my-task-manager-api-33wp.onrender.com/api";
 
 const devEnvironment = `// This file can be replaced during build by using the \`fileReplacements\` array.
 // \`ng build\` replaces \`environment.ts\` with \`environment.prod.ts\`.
@@ -59,7 +61,7 @@ const prodEnvironment = `export const environment = {
 };
 `;
 
-fs.writeFileSync(devEnvironmentPath, devEnvironment, 'utf8');
-fs.writeFileSync(prodEnvironmentPath, prodEnvironment, 'utf8');
+fs.writeFileSync(devEnvironmentPath, devEnvironment, "utf8");
+fs.writeFileSync(prodEnvironmentPath, prodEnvironment, "utf8");
 
 console.log(`Synced API_URL to Angular environments from ${rootEnvPath}`);
