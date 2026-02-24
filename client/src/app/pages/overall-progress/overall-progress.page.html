@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Overall Progress</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="overall-card ion-text-center ion-padding">
+    <h2>Total Completion</h2>
+    <div class="percentage-circle">
+      <h1>{{ overallPercentage | number:'1.0-0' }}%</h1>
+    </div>
+    <p>Keep up the great work!</p>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Daily Breakdown</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let stat of dailyStats">
+      <ion-label>
+        <h2>{{ stat.date | date:'fullDate' }}</h2>
+        <p>{{ stat.completed }} of {{ stat.total }} tasks completed</p>
+        <ion-progress-bar [value]="stat.percentage / 100"></ion-progress-bar>
+      </ion-label>
+      <ion-badge slot="end" [color]="stat.percentage === 100 ? 'success' : 'primary'">
+        {{ stat.percentage | number:'1.0-0' }}%
+      </ion-badge>
+    </ion-item>
+
+    <div *ngIf="dailyStats.length === 0 && !loading" class="ion-text-center ion-padding">
+      <p>No tasks found to calculate progress.</p>
+    </div>
+  </ion-list>
+
+  <ion-spinner *ngIf="loading" name="crescent" class="centered"></ion-spinner>
+</ion-content>

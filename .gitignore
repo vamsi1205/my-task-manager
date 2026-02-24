@@ -1,0 +1,21 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Env
+.env
+
+# Logs
+logs/
+*.log
+
+# Angular
+client/node_modules/
+client/www/
+
+# Server
+server/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

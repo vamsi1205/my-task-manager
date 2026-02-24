@@ -1,0 +1,32 @@
+.overall-card {
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  margin-bottom: 20px;
+
+  .percentage-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 8px solid var(--ion-color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+
+    h1 {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+}
+
+ion-progress-bar {
+  margin-top: 10px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.centered {
+  display: block;
+  margin: 20px auto;
+}

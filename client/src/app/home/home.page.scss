@@ -1,0 +1,16 @@
+.home-container {
+  h3 {
+    margin-top: 0;
+    font-weight: bold;
+  }
+
+  ion-progress-bar {
+    height: 12px;
+    border-radius: 6px;
+  }
+
+  p {
+    margin-top: 10px;
+    color: var(--ion-color-medium);
+  }
+}

@@ -1,0 +1,44 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" *ngIf="authService.currentUser$ | async as user">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list id="inbox-list">
+          <div class="user-details">
+            <ion-list-header>Hi, {{ user.name }}</ion-list-header>
+            <ion-note>{{ user.email }}</ion-note>
+          </div>
+
+          <div class="menu-links">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+              <ion-item routerDirection="forward" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-item (click)="logout()" lines="none" detail="false" style="cursor: pointer;">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-label>Logout</ion-label>
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+
+  <ion-router-outlet id="main-content" *ngIf="!(authService.currentUser$ | async)"></ion-router-outlet>
+
+  <div class="app-loader-overlay" *ngIf="loaderService.loading$ | async">
+    <div class="dots-loader" aria-label="Loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</ion-app>

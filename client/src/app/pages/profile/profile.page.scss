@@ -1,0 +1,18 @@
+.profile-header {
+  margin-bottom: 30px;
+
+  .centered {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+  }
+}

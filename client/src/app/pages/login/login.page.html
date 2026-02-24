@@ -1,0 +1,45 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <div class="logo-section ion-text-center">
+      <h1>My Task Manager</h1>
+      <p>{{ isLogin ? 'Welcome back!' : 'Create an account' }}</p>
+    </div>
+
+    <form (ngSubmit)="submit()">
+      <ion-list lines="inset">
+        <ion-item *ngIf="!isLogin">
+          <ion-label position="floating">Name</ion-label>
+          <ion-input type="text" [(ngModel)]="userData.name" name="name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="userData.email" name="email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="userData.password" name="password" required></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="!isLogin">
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input type="password" [(ngModel)]="userData.confirmPassword" name="confirmPassword" required></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <div class="ion-margin-top">
+        <ion-button expand="block" type="submit" [disabled]="loading">
+          {{ isLogin ? 'Login' : 'Signup' }}
+          <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+        </ion-button>
+      </div>
+    </form>
+
+    <div class="ion-text-center ion-margin-top">
+      <ion-button fill="clear" (click)="toggleMode()">
+        {{ isLogin ? "Don't have an account? Signup" : "Already have an account? Login" }}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

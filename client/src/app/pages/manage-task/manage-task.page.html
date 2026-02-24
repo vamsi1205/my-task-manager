@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEditMode ? 'Edit Task' : 'Add Task' }}</ion-title>
+    <ion-buttons slot="end" *ngIf="isEditMode">
+      <ion-button (click)="deleteTask()" color="danger">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="saveTask()">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input type="text" [(ngModel)]="taskData.title" name="title" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea [(ngModel)]="taskData.description" name="description" rows="4"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Task Date</ion-label>
+        <ion-input type="date" [(ngModel)]="taskData.taskDate" name="taskDate" required></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-margin-top">
+      <ion-button expand="block" type="submit" [disabled]="loading">
+        {{ isEditMode ? 'Update Task' : 'Create Task' }}
+        <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Task Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="home-container">
+    <div class="progress-section ion-padding">
+      <h3>Today's Progress</h3>
+      <ion-progress-bar [value]="progress"></ion-progress-bar>
+      <p class="ion-text-center">{{ (progress * 100) | number:'1.0-0' }}% Completed</p>
+    </div>
+
+    <div class="date-picker-section ion-padding">
+      <ion-item>
+        <ion-label>Select Date</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime" presentation="date" [(ngModel)]="selectedDate" (ionChange)="onDateChange()"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+    </div>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Tasks</ion-label>
+      </ion-list-header>
+
+      <ion-item-sliding *ngFor="let task of tasks">
+        <ion-item (click)="editTask(task)">
+          <ion-label>
+            <h2>{{ task.title }}</h2>
+            <p>{{ task.description }}</p>
+          </ion-label>
+          <ion-checkbox
+            slot="end"
+            [checked]="task.isCompleted"
+            (click)="$event.stopPropagation()"
+            (ionChange)="onTaskCheckboxChange(task, $event)"
+            [disabled]="!canEdit">
+          </ion-checkbox>
+        </ion-item>
+      </ion-item-sliding>
+
+      <div *ngIf="tasks.length === 0" class="ion-text-center ion-padding">
+        <p>No tasks for this day.</p>
+      </div>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="addTask()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>
