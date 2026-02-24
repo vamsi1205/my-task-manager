@@ -1,7 +1,9 @@
 const dns = require("node:dns");
 dns.setServers(["8.8.8.8", "8.8.4.4"]); // Bypasses your ISP's broken DNS
 
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+
 const app = require("./app");
 const connectDB = require("./config/db");
 
