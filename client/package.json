@@ -5,9 +5,13 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/generate-runtime-env.cjs",
     "start": "ng serve",
+    "prebuild": "node scripts/generate-runtime-env.cjs",
     "build": "ng build",
+    "prewatch": "node scripts/generate-runtime-env.cjs",
     "watch": "ng build --watch --configuration development",
+    "pretest": "node scripts/generate-runtime-env.cjs",
     "test": "ng test",
     "lint": "ng lint"
   },
